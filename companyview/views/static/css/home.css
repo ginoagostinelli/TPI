@@ -1,0 +1,17 @@
+body{
+    margin: 0;
+    font-family: sans-serif;
+    background: #1f1f1f ;
+}
+
+.center {
+    height: 10em;
+    position: relative;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%); 
+    color: white;
+}

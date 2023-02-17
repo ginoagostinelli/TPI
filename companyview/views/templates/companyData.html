@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>CompanyView</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{{ url_for('static', filename='assets/favicon.ico') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/cards.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+  </head>
+  <body id="page-top">
+
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container px-4 px-lg-5">
+          <a class="navbar-brand" href="#page-top">{{ name }}</a>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+              <ul class="navbar-nav ms-auto">
+                  <li class="nav-item"><a class="nav-link" href="#signup">Favorite</a></li>
+              </ul>
+          </div>
+      </div>
+    </nav>
+
+    <!-- News -->
+    <section class="news-section" id="news">
+      <div class="text-center">
+        <h2 class="text-white mb-5 display-2">Related News</h2>
+      </div>
+      <div class="row gx-4 gx-lg-5">
+        <!-- News Card 1 -->
+        <div class="col-md-3 mb-3 mb-md-0 py-4 h-100 ">
+          <a href="{{ link_new_1 }}" class="clickable-card">
+            <article>
+              <div class="article-wrapper">
+                <figure>
+                  <img src="{{ img_new_1 }}" alt="..." />
+                </figure>
+                <div class="article-body">
+                  <h2>{{ title_new_1 }}</h2>
+                  <div class="read-more">Read more</span>
+                  </div>
+                </div>
+            </article>
+          </a>
+        </div>
+        <!-- News Card 2 -->
+        <div class="col-md-3 mb-3 mb-md-0 py-4 h-100">
+          <a href="{{ link_new_2 }}" class="clickable-card">
+            <article>
+              <div class="article-wrapper">
+                <figure>
+                  <img src="{{ img_new_2 }}" alt="..." />
+                </figure>
+                <div class="article-body">
+                  <h2>{{ title_new_2 }}</h2>
+                  <div class="read-more">Read more</span>
+                  </div>
+                </div>
+            </article>
+          </a>
+        </div>
+        <!-- News Card 3 -->
+        <div class="col-md-3 mb-3 mb-md-0 py-4 h-100">
+          <a href="{{ link_new_3 }}" class="clickable-card">
+            <article>
+              <div class="article-wrapper">
+                <figure>
+                  <img src="{{ img_new_3 }}" alt="..." />
+                </figure>
+                <div class="article-body">
+                  <h2>{{ title_new_3 }}</h2>
+                  <div class="read-more">Read more</span>
+                  </div>
+                </div>
+            </article>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="about-section text-center bg-black" id="about">
+      <h2 class="text-white mb-5 display-2">About {{ name }}</h2>
+      <div class="container px-4 px-lg-5">
+          <div class="row gx-4 gx-lg-5 justify-content-center">
+              <div class="col-lg-8">
+                  <h3 class="text-white mb-4">Location</h3>
+                  <p class="text-white-50">{{ country }}, {{ city }}</p>
+              </div>
+            <div class="col-lg-8">
+              <h3 class="text-white mb-4">What does the company do?</h3>
+              <p class="text-white-50">{{ business }}</p>
+          </div>
+          <div class="col-lg-8">
+            <h3 class="text-white mb-4">What industry is it in?</h3>
+            <p class="text-white-50">{{ industry }}</p>
+        </div>
+        <div class="col-lg-8">
+          <h3 class="text-white mb-4">How many employees do you currently have?</h3>
+          <p class="text-white-50">{{ employees }}</p>
+      </div>
+          </div>
+      </div>
+    </section>
+
+    <!-- Timeline -->
+
+    <section class="text-center bg-black" id="timeline">
+      <div class="container justify-content-center">
+        <h2 class="text-white mb-5 display-2">Stock Price</h2>
+        {{ timeline|safe }}
+      </div>
+    </section>
+
+    <!-- Dividends-->
+
+    <section class="text-center bg-black" id="dividends">
+      <div class="container justify-content-center">
+        <h2 class="text-white mb-5 display-2">Dividends</h2>
+        {{ dividends|safe }}
+      </div>
+    </section>
+
+    <!-- Comparation-->
+    <section class="text-center bg-black" id="comparation">
+      <div class="container justify-content-center">
+        <h2 class="text-white mb-5 display-2">Comparison with other companies</h2>
+        {{ comparation|safe }}
+      </div>
+    </section>    
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
