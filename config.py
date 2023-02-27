@@ -8,7 +8,7 @@ class Config:
     SERVER_NAME = "localhost:7001"
     DEBUG = True
 
-    DATABASE_PATH = "app/database/users.db"
+    DATABASE_PATH = "app/database/database.db"
     DB_TOKEN = os.environ.get("DB_TOKEN", "")  # Para Encriptar la DB
     ENCRYPT_DB = True
 
