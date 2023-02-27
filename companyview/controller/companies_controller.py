@@ -2,6 +2,7 @@ from ..database import company_db
 from ..models.models import Company
 
 # from ..helpers import helper
+from yahooquery import Ticker
 import yfinance as yf
 import datetime
 from matplotlib.figure import Figure
@@ -15,8 +16,8 @@ import plotly.io as pio
 
 def get_company_data(company: Company) -> Company:
 
-    tk = yf.Ticker(company.ticker)
-    stockinfo = tk.info
+    summary_profile = Ticker(company.ticker).summary_profile
+    stockinfo = summary_profile.get(company.ticker)
 
     # Dates
     today = datetime.datetime.today()
