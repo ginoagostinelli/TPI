@@ -24,7 +24,7 @@ def get_company_data(company: Company) -> Company:
     start = datetime.date(today.year - 50, 1, 1)
 
     companyWithData = Company(
-        name=stockinfo.get("longName", "Sin Datos"),
+        name=company.ticker,
         ticker=company.ticker,
         stock=yf.download(company.ticker, start=start, end=today),
         country=stockinfo.get("country", "Sin Datos"),
