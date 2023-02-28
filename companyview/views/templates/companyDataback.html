@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Company</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/company.css') }}"
+    />
+  </head>
+  <body>
+    <h1>{{ name }}</h1>
+    <br />
+    <h2>Noticias recientes</h2>
+    <ul class="list-group">
+      <li class="list-group-item"><a href="{{ link1 }}"> {{ title1 }}</a></li>
+      <li class="list-group-item"><a href="{{ link2 }}"> {{ title2 }}</a></li>
+      <li class="list-group-item"><a href="{{ link3 }}"> {{ title3 }}</a></li>
+    </ul>
+
+    <hr />
+    <h2>Cotización</h2>
+    <!--<img src="/timeline" alt="Cotización" />-->
+    <img src="data:image/png;base64, {{ timeline }}" alt="Cotizacion" />
+    <!-- <img src="data:image/png;base64, {{ dividends }}" /> -->
+
+    <h2>Dividendos</h2>
+    <img src="data:image/png;base64, {{ dividends }}" alt="Dividendos" />
+
+    <h2>Comparación con otras empresas</h2>
+    <img src="data:image/png;base64, {{ comparation }}" alt="Comparación" />
+
+    <hr />
+    <h2>Datos de la empresa</h2>
+    {{ country}}
+    <br />
+    {{ city }}
+    <br />
+    {{ industry }}
+    <br />
+    {{ employees }}
+    <br />
+
+    {{ business }}
+    <br />
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

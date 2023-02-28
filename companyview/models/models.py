@@ -1,5 +1,7 @@
 from typing import NamedTuple, Optional
 from pandas import DataFrame
+from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 class Company(NamedTuple):
@@ -15,8 +17,22 @@ class Company(NamedTuple):
     business: Optional[str] = None
 
 
-class User(NamedTuple):
-    id: Optional[int] = None
-    first_name: Optional[str] = None
-    last_name: Optional[str] = None
-    email: Optional[str] = None
+class Favorite(NamedTuple):
+    id_user: Optional[int] = None
+    id_company: Optional[int] = None
+
+
+
+
+class User(UserMixin):
+    def __init__(self, name, email,id=None,password=None):
+        self.id = id
+        self.name = name
+        self.email = email
+        self.password = password
+    def set_password(self, password):
+        self.password = generate_password_hash(password)
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
+    def __repr__(self):
+        return '<User {}>'.format(self.email)

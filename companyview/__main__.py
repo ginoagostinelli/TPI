@@ -5,6 +5,6 @@ Estando en la carpeta de .env
 """
 
 from . import app
-
+#from . import companyviewer
 if __name__ == "__main__":
     app.run()  # No añadir parámetros, modificar directamente en Config

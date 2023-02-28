@@ -1,7 +1,11 @@
 Flask
 yfinance
+yahooquery
 matplotlib
 plotly
 python-dotenv
 pandas
 faker
+flask_wtf
+flask_login
+email_validator

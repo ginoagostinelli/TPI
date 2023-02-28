@@ -11,21 +11,21 @@ def create(user: User) -> User:
     if user_exists("email", user.email):
         raise UserAlreadyExists(f"Email {user.email} is already used")
 
-    query = """INSERT INTO users VALUES (:first_name, :last_name, :email)"""
+    query = """INSERT INTO user VALUES (:id, :name , :email, :password)"""
 
-    user_dict = user._asdict()
+    user_dict = [None,user.name,user.email,user.password]
+    
+    id_ = _fetch_lastrow_id(query,user_dict)
 
-    id_ = _fetch_lastrow_id(query, user_dict)
-
-    user_dict["id"] = id_
-    return User(**user_dict)
+    user.id = id_
+    return user
 
 
 def update(user: User) -> User:
     if not user_exists("oid", user.id):
         raise UserNotFound("User not Found!")
 
-    query = """UPDATE users SET first_name = :first_name, last_name = :last_name, email = :email
+    query = """UPDATE user SET first_name = :first_name, last_name = :last_name, email = :email
                WHERE oid = :oid"""
 
     parameters = user._asdict()
@@ -39,7 +39,7 @@ def delete(user: User) -> User:
     if not user_exists("oid", user.id):
         raise UserNotFound("User not Found!")
 
-    query = "DELETE FROM users WHERE oid = ?"
+    query = "DELETE FROM user WHERE oid = ?"
     parameters = [user.id]
 
     _fetch_none(query, parameters)
@@ -48,19 +48,19 @@ def delete(user: User) -> User:
 
 
 def list_all() -> List[User]:
-    query = "SELECT oid, * FROM users"
+    query = "SELECT oid, * FROM user"
     records = _fetch_all(query)
 
-    users = []
+    user = []
     for record in records:
         user = User(id=record[0], first_name=record[1], last_name=record[2], email=record[3])
-        users.append(user)
+        user.append(user)
 
-    return users
+    return user
 
 
 def detail(user: User) -> User:
-    query = "SELECT oid, * FROM users WHERE oid=?"
+    query = "SELECT oid, * FROM user WHERE oid=?"
     parameters = [user.id]
 
     record = _fetch_one(query, parameters)
@@ -68,13 +68,41 @@ def detail(user: User) -> User:
     if record is None:
         raise UserNotFound(f"No user with id: {user.id}")
 
-    user = User(id=record[0], first_name=record[1], last_name=record[2], email=record[3])
+    user = User(name=record[1], email=record[2],id=record[0], password=record[3])
+
+    return user
+
+def get_by_email(email) -> User:
+    query = "SELECT * FROM user WHERE email=?"
+    parameters = [email]
+
+    record = _fetch_one(query, parameters)
+
+    if record is None:
+        return None
+        #raise UserNotFound(f"No user with mail: {user.email}")
+
+    user = User(name=record[1], email=record[2],id=record[0], password=record[3])
+
+    return user
+
+def get_by_id(id) -> User:
+    query = "SELECT * FROM user WHERE id=?"
+    parameters = [id]
+
+    record = _fetch_one(query, parameters)
+
+    if record is None:
+        return None
+        #raise UserNotFound(f"No user with mail: {user.email}")
+
+    user = User(id=record[0], name=record[1], email=record[2], password=record[3])
 
     return user
 
 
 def user_exists(field: str, value: str) -> bool:
-    query = f"SELECT oid, email FROM users WHERE {field}=?"
+    query = f"SELECT oid, email FROM user WHERE {field}=?"
     parameters = [value]
 
     record = _fetch_one(query, parameters)
@@ -83,11 +111,11 @@ def user_exists(field: str, value: str) -> bool:
 
 
 def reset_table() -> None:
-    query = "DROP TABLE IF EXISTS users"
+    query = "DROP TABLE IF EXISTS user"
     _fetch_none(query)
 
     fields = """(first_name text, last_name text, email text)"""
-    query = f"CREATE TABLE IF NOT EXISTS users {fields}"
+    query = f"CREATE TABLE IF NOT EXISTS user {fields}"
 
     _fetch_none(query)
 
@@ -100,3 +128,5 @@ def reset_table() -> None:
                             email=fake.email())
 
         create(test_user)
+
+

@@ -4,13 +4,13 @@ from typing import Any, Iterator, List, Optional
 import sqlite3
 
 from config import Config
-from .security import _encrypt_decrypt
+#from .security import _encrypt_decrypt
 
 DATABASE_PATH = Config.DATABASE_PATH
 
 
 @contextmanager
-@_encrypt_decrypt
+#@_encrypt_decrypt
 def __get_cursor() -> Iterator[sqlite3.Cursor]:
     connection: sqlite3.Connection = sqlite3.connect(DATABASE_PATH)
     cursor: sqlite3.Cursor = connection.cursor()
@@ -49,6 +49,7 @@ def _fetch_none(query: str, parameters: Optional[List[str]] = None) -> None:
 
 
 def _fetch_lastrow_id(query: str, parameters: Optional[List[str]] = None) -> int:
+    print(query,parameters)
     if parameters is None:
         parameters = []
 
