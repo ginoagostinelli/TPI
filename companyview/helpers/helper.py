@@ -6,7 +6,7 @@ from ..models.exceptions import UserNotValid, CompanyNotValid
 
 def validate_ticker(ticker: str) -> None:
     if ticker is None or len(ticker) == 0 or any(chr.isdigit() for chr in ticker):
-        raise CompanyNotValid("The company name is incorrect")
+        raise CompanyNotValid("The company name is incorrect or doesn't exists")
 
 
 def validate_user(user: User) -> None:

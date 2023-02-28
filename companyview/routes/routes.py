@@ -4,7 +4,7 @@ from companyview.models.models import Company
 from companyview.models.models import Company, User
 from companyview.controller import companies_controller
 from flask import Blueprint, render_template, Response, request, redirect, url_for, g
-from companyview.forms import SignupForm, LoginForm
+from companyview.helpers.forms import SignupForm, LoginForm
 import io
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
