@@ -2,10 +2,17 @@ import re
 
 from ..models.models import User
 from ..models.exceptions import UserNotValid, CompanyNotValid
+from yahooquery import Ticker
 
 
 def validate_ticker(ticker: str) -> None:
-    if ticker is None or len(ticker) == 0 or any(chr.isdigit() for chr in ticker):
+    info = Ticker(ticker).summary_profile.get(ticker)
+    if (
+        ticker is None
+        or len(ticker) == 0
+        or any(chr.isdigit() for chr in ticker)
+        or len(info) > 30
+    ):
         raise CompanyNotValid("The company name is incorrect or doesn't exists")
 
 
@@ -14,6 +21,7 @@ def validate_user(user: User) -> None:
         raise UserNotValid(f"The email address: {user.email} is not valid")
 
     if None in (user.first_name, user.last_name, user.email):
+        print("hi")
         raise UserNotValid("The user has no first name, last name or email")
 
 

@@ -27,11 +27,11 @@ def get_company_data(company: Company) -> Company:
         name=company.ticker,
         ticker=company.ticker,
         stock=yf.download(company.ticker, start=start, end=today),
-        country=stockinfo.get("country", "Sin Datos"),
-        city=stockinfo.get("city", "Sin Datos"),
-        industry=stockinfo.get("industry", "Sin Datos"),
-        employees=stockinfo.get("fullTimeEmployees", "Sin Datos"),
-        business=stockinfo.get("longBusinessSummary", "Sin Datos"),
+        country=stockinfo.get("country", "No Data"),
+        city=stockinfo.get("city", "No Data"),
+        industry=stockinfo.get("industry", "No Data"),
+        employees=stockinfo.get("fullTimeEmployees", "No Data"),
+        business=stockinfo.get("longBusinessSummary", "No Data"),
     )
 
     return companyWithData
@@ -108,8 +108,8 @@ def get_dividends_plot(company: Company) -> Figure:
 def get_comparation_plot(company: Company) -> Figure:
 
     # Fechas
-    today = datetime.datetime.today()  # Fecha de hoy
-    start = datetime.date(today.year - 50, 1, 1)  # Fecha - 12 años
+    today = datetime.datetime.today()
+    start = datetime.date(today.year - 50, 1, 1)
 
     # Define the symbols and time range
     symbols = ["AAPL", "MSFT", "AMZN"]

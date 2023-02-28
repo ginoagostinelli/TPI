@@ -15,11 +15,6 @@ from companyview.database import user_db, favorite_db
 global_scope = Blueprint("views", __name__)
 
 
-# @global_scope.before_request
-# def before_request():
-#     g.company = request.args.get("ticker")
-
-
 @global_scope.route("/", methods=["GET"])
 def home():
     """Landing page route."""
@@ -30,7 +25,7 @@ def home():
 @global_scope.route("/company", methods=["GET"])
 def company():
 
-    ticker = request.args.get("ticker")
+    ticker = request.args.get("ticker").upper()
     helper.validate_ticker(ticker)
 
     company = companies_controller.get_company_data(Company(ticker=ticker))
