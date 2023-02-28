@@ -108,8 +108,8 @@ def get_dividends_plot(company: Company) -> Figure:
 def get_comparation_plot(company: Company) -> Figure:
 
     # Fechas
-    today = datetime.datetime.today()  # Fecha de hoy
-    start = datetime.date(today.year - 50, 1, 1)  # Fecha - 12 años
+    today = datetime.datetime.today()
+    start = datetime.date(today.year - 50, 1, 1)
 
     # Define the symbols and time range
     symbols = ["AAPL", "MSFT", "AMZN"]
