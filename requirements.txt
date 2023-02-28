@@ -1,6 +1,7 @@
 Flask
 yfinance
 yahooquery
+gunicorn
 matplotlib
 plotly
 python-dotenv

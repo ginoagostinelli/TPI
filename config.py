@@ -5,8 +5,7 @@ load_dotenv()  # Carga todo el contenido de .env en variables de entorno
 
 
 class Config:
-    SERVER_NAME = "localhost:7001"
-    DEBUG = True
+    DEBUG = False
 
     DATABASE_PATH = "app/database/database.db"
     DB_TOKEN = os.environ.get("DB_TOKEN", "")  # Para Encriptar la DB
