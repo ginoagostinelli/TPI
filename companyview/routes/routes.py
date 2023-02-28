@@ -10,7 +10,7 @@ from matplotlib.figure import Figure
 from werkzeug.urls import url_parse
 from flask_login import LoginManager,current_user,login_user,logout_user
 from companyview.database import user_db, favorite_db
-
+from ..models.exceptions import UserNotValid, CompanyNotValid
 
 global_scope = Blueprint("views", __name__)
 
@@ -56,10 +56,13 @@ def company():
 
 @global_scope.route("/signUp", methods=["GET", "POST"])
 def show_signup_form():
+    
     if current_user.is_authenticated:
         return redirect(url_for("views.home"))
     form = SignupForm()
     error = None
+    
+    
     if form.validate_on_submit():
         name = form.name.data
         email = form.email.data
@@ -67,7 +70,9 @@ def show_signup_form():
         # Comprobamos que no hay ya un usuario con ese emai
         user = user_db.get_by_email(email)
         if user is not None:
+            
             error = f"El email {email} ya está siendo utilizado por otro usuario"
+            raise CompanyNotValid(error)
         else:
             # Creamos el usuario y lo guardamos
             user = User(name=name, email=email)
@@ -99,8 +104,10 @@ def login():
                 next_page = url_for('views.home')
             return redirect(next_page)
         else:
-            next_page = url_for('views.home')
-            return redirect(next_page)
+            error = "Usuario o contraseña incorrectos"
+            raise CompanyNotValid(error)
+            #next_page = url_for('views.home')
+            #return redirect(next_page)
     return render_template('login.html', form=form)
 
 

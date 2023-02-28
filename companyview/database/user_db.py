@@ -80,7 +80,7 @@ def get_by_email(email) -> User:
 
     if record is None:
         return None
-        #raise UserNotFound(f"No user with mail: {user.email}")
+        #raise UserNotFound(f"No user with mail: {email}")
 
     user = User(name=record[1], email=record[2],id=record[0], password=record[3])
 

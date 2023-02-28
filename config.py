@@ -7,7 +7,7 @@ load_dotenv()  # Carga todo el contenido de .env en variables de entorno
 class Config:
     DEBUG = False
 
-    DATABASE_PATH = "app/database/database.db"
+    DATABASE_PATH = "companyview/database/database.db"
     DB_TOKEN = os.environ.get("DB_TOKEN", "")  # Para Encriptar la DB
     ENCRYPT_DB = True
 
