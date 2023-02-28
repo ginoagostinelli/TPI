@@ -19,7 +19,7 @@ class Company(NamedTuple):
 
 class Favorite(NamedTuple):
     id_user: Optional[int] = None
-    id_company: Optional[int] = None
+    id_company: Optional[str] = None
 
 
 

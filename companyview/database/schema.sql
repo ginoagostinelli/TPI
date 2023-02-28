@@ -11,6 +11,6 @@ CREATE TABLE user (
 DROP TABLE IF EXISTS favorite;
 
 CREATE TABLE favorite (
-    id_user INTEGER ,
-    id_company INTEGER 
+    id_user INTEGER NOT NULL ,
+    id_company TEXT not null 
 );

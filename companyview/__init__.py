@@ -34,11 +34,11 @@ app.register_blueprint(api_scope, url_prefix="/api")
 # reset_table() # Borrar al terminar testeo
 
 
-"""
-connection = sqlite3.connect('app/database/database.db')
+
+connection = sqlite3.connect('companyview/database/database.db')
 
 
-with open('app/database/schema.sql') as f:
+with open('companyview/database/schema.sql') as f:
     connection.executescript(f.read())
 
 cur = connection.cursor()
@@ -46,7 +46,7 @@ cur = connection.cursor()
 
 connection.commit()
 connection.close()
-"""
+
 
 
 print("--------------------------------", current_user)
