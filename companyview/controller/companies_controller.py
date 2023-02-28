@@ -27,11 +27,11 @@ def get_company_data(company: Company) -> Company:
         name=company.ticker,
         ticker=company.ticker,
         stock=yf.download(company.ticker, start=start, end=today),
-        country=stockinfo.get("country", "Sin Datos"),
-        city=stockinfo.get("city", "Sin Datos"),
-        industry=stockinfo.get("industry", "Sin Datos"),
-        employees=stockinfo.get("fullTimeEmployees", "Sin Datos"),
-        business=stockinfo.get("longBusinessSummary", "Sin Datos"),
+        country=stockinfo.get("country", "No Data"),
+        city=stockinfo.get("city", "No Data"),
+        industry=stockinfo.get("industry", "No Data"),
+        employees=stockinfo.get("fullTimeEmployees", "No Data"),
+        business=stockinfo.get("longBusinessSummary", "No Data"),
     )
 
     return companyWithData
