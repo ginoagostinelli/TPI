@@ -19,15 +19,22 @@ global_scope = Blueprint("views", __name__)
 def home():
     """Landing page route."""
     if current_user.is_authenticated:
+        login=''
+        signup=''
+        logout='Log Out'
         id_user=current_user.id
         favs=favorite_db.list(int(id_user))
         usuario='hi '+ str(current_user.name)
+
     else:
         favs=[]
         usuario=''
+        login='Log In'
+        signup='Sign Up'
+        logout=''
 
     
-    return render_template("home.html",favs=favs,usuario=usuario)
+    return render_template("home.html",favs=favs,usuario=usuario,login=login,signup=signup,logout=logout)
 
 
 @global_scope.route("/company", methods=["GET"])
@@ -130,24 +137,26 @@ def logout():
 
 @global_scope.route("favorite", methods=['GET', 'POST'])
 def add_fav():
-    if request.method == 'POST':
-        f=Favorite()
-        f.id_user=request.form.get('id_user') 
-        f.id_company= request.form.get('id_company') 
-        favorite_db.create(f)
-    elif request.method == 'GET':
-        return redirect(url_for('views.home'))
+    if current_user.is_authenticated:
+        if request.method == 'POST':
+            f=Favorite()
+            f.id_user=current_user.id
+            f.id_company= request.form.get('id_company') 
+            favorite_db.create(f)
+        elif request.method == 'GET':
+            return redirect(url_for('views.home'))
     
     return  render_template("companyData.html")
 
 @global_scope.route("del_favorite", methods=['GET', 'POST'])
 def del_fav():
-    if request.method == 'POST':
-        f=Favorite()
-        f.id_user=request.form.get('id_user') 
-        f.id_company= request.form.get('id_company') 
-        favorite_db.delete(f)
-    elif request.method == 'GET':
-        return redirect(url_for('views.home'))
+    if current_user.is_authenticated:
+        if request.method == 'POST':
+            f=Favorite()
+            f.id_user=current_user.id
+            f.id_company= request.form.get('id_company') 
+            favorite_db.delete(f)
+        elif request.method == 'GET':
+            return redirect(url_for('views.home'))
     
     return  render_template("companyData.html")

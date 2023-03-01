@@ -25,7 +25,6 @@
       <div class="favs">
         <h2>Favorites</h2>
         <ul>
-          <li href="Linkedin.com">LinkedIn</li>
           {% for fav in favs %}
           <li><a href="https://www.linkedin.com/">{{ fav}}</a></li>
           {% endfor %}
@@ -38,7 +37,7 @@
         <a class="navbar-brand">
           {{ usuario }}
         </a>
-        ̣<a class="navbar-brand" href="logIn"> Log In </a>
+        ̣<a class="navbar-brand" href="logIn"> {{ login }}</a>
 
         ̣<a class="navbar-brand" href="signUp">
           
