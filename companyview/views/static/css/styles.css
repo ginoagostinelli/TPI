@@ -82,6 +82,37 @@ body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+
+.favs {
+	position: fixed;
+	top: 0;
+	right: 0;
+	background-color: rgba(0, 0, 0, 0.7);
+	padding: 10px;
+	border-radius: 20px;
+}
+
+.favs h2 {
+	color: rgb(158, 158, 158);
+	font-size: 24px;
+	margin: 0;
+	padding: 0;
+}
+
+.favs ul {
+	list-style: none;
+  color: rgb(255, 255, 255);
+	margin: 0;
+	padding: 0;
+}
+
+.rectangulo li {
+	color: rgb(255, 255, 255);
+	font-size: 18px;
+	margin: 10px 0;
+}
+
+
 hr {
   margin: 1rem 0;
   color: inherit;
