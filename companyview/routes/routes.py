@@ -21,12 +21,12 @@ def home():
     if current_user.is_authenticated:
         id_user=current_user.id
         favs=favorite_db.list(int(id_user))
-        usuario='hi '+ str(current_user.id)#cambiar por name
+        usuario='hi '+ str(current_user.name)
     else:
         favs=[]
         usuario=''
 
-    favs=[]
+    
     return render_template("home.html",favs=favs,usuario=usuario)
 
 

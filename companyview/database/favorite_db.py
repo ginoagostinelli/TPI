@@ -41,7 +41,7 @@ def list_all() -> List[Favorite]:
     return favorites
 
 
-def list(id_user:int) -> List[Favorite]:
+def list(id_user:int) -> List[str]:
     query = "SELECT  id_company FROM favorite where id_user= ?"
     parameters = [id_user]
     records = _fetch_all(query,parameters)

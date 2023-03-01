@@ -25,11 +25,11 @@
       <div class="favs">
         <h2>Favorites</h2>
         <ul>
-          <li>LinkedIn</li>
-          <li>Amazon</li>
-          <li>Meta</li>
-          otro
-          {{ favs }}
+          <li href="Linkedin.com">LinkedIn</li>
+          {% for fav in favs %}
+          <li><a href="https://www.linkedin.com/">{{ fav}}</a></li>
+          {% endfor %}
+        
         </ul>
       </div>
 
