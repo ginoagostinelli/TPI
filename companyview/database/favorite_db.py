@@ -42,12 +42,13 @@ def list_all() -> List[Favorite]:
 
 
 def list(id_user:int) -> List[Favorite]:
-    query = "SELECT  * FROM favorites where id_user= ?"
-    records = _fetch_all(query)
+    query = "SELECT  id_company FROM favorite where id_user= ?"
     parameters = [id_user]
+    records = _fetch_all(query,parameters)
+    
     favorites = []
     for record in records:
-        favorite = Favorite(id_user=record[0], id_company=record[1])
-        favorites.append(favorite)
+        id_company=record[0]
+        favorites.append(id_company)
 
     return favorites

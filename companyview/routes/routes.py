@@ -15,11 +15,19 @@ from ..models.exceptions import UserNotValid, CompanyNotValid
 global_scope = Blueprint("views", __name__)
 
 
-@global_scope.route("/", methods=["GET"])
+@global_scope.route("/", methods=["GET","POST"])
 def home():
     """Landing page route."""
+    if current_user.is_authenticated:
+        id_user=current_user.id
+        favs=favorite_db.list(int(id_user))
+        usuario='hi '+ str(current_user.id)#cambiar por name
+    else:
+        favs=[]
+        usuario=''
 
-    return render_template("home.html")
+    favs=[]
+    return render_template("home.html",favs=favs,usuario=usuario)
 
 
 @global_scope.route("/company", methods=["GET"])
