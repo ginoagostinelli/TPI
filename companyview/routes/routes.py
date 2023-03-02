@@ -56,7 +56,10 @@ def company():
     timeline_plot = companies_controller.get_timeline_plot(company)
     dividends_plot = companies_controller.get_dividends_plot(company)
     comparation_plot = companies_controller.get_comparation_plot(company)
-    favs = favorite_db.list(int(current_user.id))
+    if current_user.is_authenticated:
+        favs = favorite_db.list(int(current_user.id))
+    else:
+        favs = []
 
     return render_template(
         "companyData.html",
