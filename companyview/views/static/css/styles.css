@@ -11603,6 +11603,19 @@ body {
   border: 0;
 }
 
+.masterform {
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: 35rem;
+  padding: 15rem 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%), url("../assets/img/bg-masthead.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+}
+
 .masthead {
   position: relative;
   width: 100%;
@@ -11615,6 +11628,8 @@ body {
   background-attachment: scroll;
   background-size: cover;
 }
+
+
 .masthead h1, .masthead .h1 {
   font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-size: 2.5rem;
@@ -11649,6 +11664,25 @@ body {
     max-width: 30rem;
     font-size: 1.25rem;
   }
+}
+.form-section {
+  padding-top: 10rem;
+  background: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.9) 75%, rgba(0, 0, 0, 0.8) 100%);
+}
+.form-section p {
+  margin-bottom: 5rem;
+}
+
+.register-image{
+  background:url("../assets/img/bg_register.jpg");
+  background-position:center;
+  background-size:cover
+}
+
+.login-image{
+  background:url("../assets/img/bg_login.jpg");
+  background-position:center;
+  background-size:cover
 }
 
 .about-section {
