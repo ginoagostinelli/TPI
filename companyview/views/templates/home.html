@@ -17,8 +17,6 @@
   </head>
   <body>
 
-    
-    
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
 
@@ -26,41 +24,34 @@
         <h2>Favorites</h2>
         <ul>
           {% for fav in favs %}
-          <li><a href="https://www.linkedin.com/">{{ fav}}</a></li>
+          <li>
+            <form action="/company" method="GET" >
+              <button class="btn btn-primary" type="submit" id="ticker" name="ticker" value="{{ fav }}">{{ fav }}</button>
+            </form>
+          </li>
           {% endfor %}
-        
         </ul>
       </div>
 
       <div class="container px-4 px-lg-5">
-        <!--<a class="navbar-brand" href="logIn">Login</a> -->
-        <a class="navbar-brand">
-          {{ usuario }}
-        </a>
-        ̣<a class="navbar-brand" href="logIn"> {{ login }}</a>
+        {% if is_logged_in %}
 
-        ̣<a class="navbar-brand" href="signUp">
-          
-          Sign Up
-        </a>
-
-        <a class="navbar-brand" href="logout">
-          Log Out
-        </a>
-
-        <!--<div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="#about">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#projects">Projects</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#signup">Contact</a>
+          <a class="navbar-brand"> {{ user }}</a>
+          <ul class="navbar-nav ms-auto"></ul>
+            <li class="nav-item">  
+              <a class="navbar-brand" href="logout">Log Out</a>
             </li>
           </ul>
-        </div>-->
+        {% else %}
+          <ul class="navbar-nav ms-auto"></ul>
+            <li class="nav-item">
+              <a class="navbar-brand" href="logIn">Sign In</a>
+            </li>
+            <li class="nav-item">  
+              <a class="navbar-brand" href="signUp"> Sign Up</a>
+            </li>
+          </ul>
+        {% endif %}
       </div>
     </nav>
     <!-- Masthead-->
@@ -105,10 +96,6 @@
         </div>
       </div>
     </header>
-    
-  
-
-    
     <body>
       
 </html>

@@ -18,23 +18,21 @@ global_scope = Blueprint("views", __name__)
 @global_scope.route("/", methods=["GET","POST"])
 def home():
     """Landing page route."""
+    param = {}
     if current_user.is_authenticated:
-        login=''
-        signup=''
-        logout='Log Out'
-        id_user=current_user.id
-        favs=favorite_db.list(int(id_user))
-        usuario='hi '+ str(current_user.name)
-
+        params = {
+            "is_logged_in" : True,
+            "favs" : favorite_db.list(int(current_user.id)),
+            "user" : f"Hi {current_user.name}",
+        }
     else:
-        favs=[]
-        usuario=''
-        login='Log In'
-        signup='Sign Up'
-        logout=''
+        params = {
+            "is_logged_in" : False,
+            "favs": [],
+        }
 
     
-    return render_template("home.html",favs=favs,usuario=usuario,login=login,signup=signup,logout=logout)
+    return render_template("home.html", **params)
 
 
 @global_scope.route("/company", methods=["GET"])
@@ -58,6 +56,7 @@ def company():
     timeline_plot = companies_controller.get_timeline_plot(company)
     dividends_plot = companies_controller.get_dividends_plot(company)
     comparation_plot = companies_controller.get_comparation_plot(company)
+    favs = favorite_db.list(int(current_user.id))
 
     return render_template(
         "companyData.html",
@@ -66,6 +65,7 @@ def company():
         timeline=timeline_plot,
         dividends=dividends_plot,
         comparation=comparation_plot,
+        favs = favs,
     )
 
 
@@ -125,38 +125,27 @@ def login():
             #return redirect(next_page)
     return render_template('login.html', form=form)
 
-
-
-
-
 @global_scope.route('/logout',methods=["GET", "POST"])
 def logout():
     logout_user()
     return redirect(url_for('views.home'))
 
 
-@global_scope.route("favorite", methods=['GET', 'POST'])
-def add_fav():
+@global_scope.route("/favorite", methods=['GET', 'POST'])
+def favorite():
     if current_user.is_authenticated:
         if request.method == 'POST':
-            f=Favorite()
-            f.id_user=current_user.id
-            f.id_company= request.form.get('id_company') 
-            favorite_db.create(f)
-        elif request.method == 'GET':
-            return redirect(url_for('views.home'))
-    
-    return  render_template("companyData.html")
+            print(request.form.get('ticker'))
+            f = Favorite(id_user=current_user.id, id_company=request.form.get('ticker'))
+            if not favorite_db.exists(f):
+                favorite_db.create(f)
+                
+            else:
+                favorite_db.delete(f)
 
-@global_scope.route("del_favorite", methods=['GET', 'POST'])
-def del_fav():
-    if current_user.is_authenticated:
-        if request.method == 'POST':
-            f=Favorite()
-            f.id_user=current_user.id
-            f.id_company= request.form.get('id_company') 
-            favorite_db.delete(f)
+            return redirect(request.referrer)
+        
         elif request.method == 'GET':
             return redirect(url_for('views.home'))
-    
-    return  render_template("companyData.html")
+
+    return render_template("companyData.html")

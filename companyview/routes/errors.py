@@ -12,6 +12,7 @@ errors_scope = Blueprint("errors", __name__)
 
 def __generate_error_response(error: Exception) -> Response:
     message = {"ErrorType": type(error).__name__, "Message": str(error)}
+    print(error)
     return jsonify(message)
 
 

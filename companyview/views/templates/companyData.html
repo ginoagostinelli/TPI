@@ -28,11 +28,26 @@
           <a class="navbar-brand" href="#page-top">{{ name }}</a>
           <div class="collapse navbar-collapse" id="navbarResponsive">
               <ul class="navbar-nav ms-auto">
-                  <li class="nav-item"><a class="nav-link" href="favorite">Favorite</a></li>
+                <form action="/favorite" method="POST">
+                  <button class="favorite-button navbar-brand" type="submit" id="ticker" name="ticker" value="{{ name }}">Favorite</button>
+                </form>
               </ul>
           </div>
       </div>
     </nav>
+
+    <div class="favs">
+      <h2>Favorites</h2>
+      <ul>
+        {% for fav in favs %}
+        <li>
+          <form action="/company" method="GET" >
+            <button class="btn btn-primary" type="submit" id="ticker" name="ticker" value="{{ fav }}">{{ fav }}</button>
+          </form>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
 
     <!-- News -->
     <section class="news-section" id="news">

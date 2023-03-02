@@ -8,20 +8,21 @@ from faker import Faker
 
 
 def create(favorite: Favorite) -> Favorite:
-    query = """INSERT INTO favorites VALUES (:id_user, :id_company)"""
+    query = "INSERT INTO favorite VALUES (:id_user, :id_company)"
 
-    favorite_dict = [favorite.id_user,favorite.id_company]
+    favorite_params = [favorite.id_user,favorite.id_company]
 
     #id_ = _fetch_lastrow_id(query, favorite_dict)
 
     #favorite_dict["id"] = id_
+    _fetch_none(query, favorite_params)
     return favorite
 
 
 
 
 def delete(favorite: Favorite) -> Favorite:
-    query = "DELETE FROM favorites WHERE  id_user= ? and id_company= ?"
+    query = "DELETE FROM favorite WHERE  id_user= ? and id_company= ?"
     parameters = [favorite.id_user,favorite.id_company]
 
     _fetch_none(query, parameters)
@@ -30,7 +31,7 @@ def delete(favorite: Favorite) -> Favorite:
 
 
 def list_all() -> List[Favorite]:
-    query = "SELECT  * FROM favorites"
+    query = "SELECT  * FROM favorite"
     records = _fetch_all(query)
 
     favorites = []
@@ -42,10 +43,22 @@ def list_all() -> List[Favorite]:
 
 
 def list(id_user:int) -> List[str]:
-    query = "SELECT  id_company FROM favorite where id_user= ?"
+    query = "SELECT id_company FROM favorite where id_user= ?"
     parameters = [id_user]
     records = _fetch_all(query,parameters)
     
+    favorites = []
+    for record in records:
+        id_company=record[0]
+        favorites.append(id_company)
+
+    return favorites
+
+def exists(fav:Favorite) -> List[str]:
+    query = "SELECT id_company FROM favorite where id_user= ? and id_company= ?"
+    parameters = [fav.id_user,fav.id_company]
+    records = _fetch_all(query,parameters)
+
     favorites = []
     for record in records:
         id_company=record[0]

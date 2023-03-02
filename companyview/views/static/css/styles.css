@@ -106,6 +106,12 @@ body {
 	padding: 0;
 }
 
+.favorite-button {
+  outline: none;
+  border: none;
+  background-color: transparent;
+}
+
 .rectangulo li {
 	color: rgb(255, 255, 255);
 	font-size: 18px;
