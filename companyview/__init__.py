@@ -6,6 +6,11 @@ from flask_login import current_user, LoginManager
 from .routes import global_scope, api_scope, errors_scope
 import sqlite3
 from .database import user_db
+import os
+from dotenv import load_dotenv  # Instalar con pip install python-dotenv
+
+load_dotenv()  # Carga todo el contenido de .env en variables de entorno
+
 
 # agrego lo necesario para el log in
 
@@ -16,7 +21,7 @@ app.config.from_object(Config)
 
 app.config[
     "SECRET_KEY"
-] = "7110c8ae51a4b5af97be6534caef90e4bb9bdcb3380af008f90b23a5d1616bf319bc298105da20fe"
+] = os.getenv("SECRET_KEY","")
 login_manager = LoginManager(app)
 login_manager.init_app(app)
 login_manager.login_view = "login"
