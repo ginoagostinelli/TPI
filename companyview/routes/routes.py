@@ -53,6 +53,10 @@ def company():
         "max_year_price": company.max_year_price,
         "min_year_price": company.min_year_price,
     }
+    if current_user.is_authenticated:
+        is_logged_in = True
+    else:
+        is_logged_in = False
 
     news = companies_controller.get_news(company)
 
@@ -72,6 +76,7 @@ def company():
         dividends=dividends_plot,
         comparation=comparation_plot,
         favs=favs,
+        is_logged_in=is_logged_in,
     )
 
 
