@@ -15,6 +15,10 @@ class Company(NamedTuple):
     industry: Optional[str] = None
     employees: Optional[str] = None
     business: Optional[str] = None
+    max_historical_price: Optional[float] = None
+    min_historical_price: Optional[float] = None
+    max_year_price: Optional[float] = None
+    min_year_price: Optional[float] = None
 
 
 class Favorite(NamedTuple):
@@ -22,17 +26,18 @@ class Favorite(NamedTuple):
     id_company: Optional[str] = None
 
 
-
-
 class User(UserMixin):
-    def __init__(self, name, email,id=None,password=None):
+    def __init__(self, name, email, id=None, password=None):
         self.id = id
         self.name = name
         self.email = email
         self.password = password
+
     def set_password(self, password):
         self.password = generate_password_hash(password)
+
     def check_password(self, password):
         return check_password_hash(self.password, password)
+
     def __repr__(self):
-        return '<User {}>'.format(self.email)
+        return "<User {}>".format(self.email)

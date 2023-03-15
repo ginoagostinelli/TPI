@@ -16,12 +16,17 @@ import plotly.io as pio
 
 def get_company_data(company: Company) -> Company:
 
-    summary_profile = Ticker(company.ticker).summary_profile
+    ticker = Ticker(company.ticker)
+    summary_profile = ticker.summary_profile
     stockinfo = summary_profile.get(company.ticker)
 
     # Dates
     today = datetime.datetime.today()
     start = datetime.date(today.year - 50, 1, 1)
+    last_year = datetime.date(today.year - 1, 1, 1)
+
+    year_summary = ticker.history(start=last_year, end=today)
+    historical_summary = ticker.history(start=start, end=today)
 
     companyWithData = Company(
         name=company.ticker,
@@ -32,6 +37,10 @@ def get_company_data(company: Company) -> Company:
         industry=stockinfo.get("industry", "No Data"),
         employees=stockinfo.get("fullTimeEmployees", "No Data"),
         business=stockinfo.get("longBusinessSummary", "No Data"),
+        max_historical_price=round(historical_summary["high"].max(), 2),
+        min_historical_price=round(historical_summary["low"].min(), 2),
+        max_year_price=round(year_summary["high"].max(), 2),
+        min_year_price=round(year_summary["low"].min(), 2),
     )
 
     return companyWithData

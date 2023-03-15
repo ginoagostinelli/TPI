@@ -111,24 +111,35 @@
     <section class="about-section text-center bg-black" id="about">
       <h2 class="text-white mb-5 display-2">About {{ name }}</h2>
       <div class="container px-4 px-lg-5">
-          <div class="row gx-4 gx-lg-5 justify-content-center">
-              <div class="col-lg-8">
-                  <h3 class="text-white mb-4">Location</h3>
-                  <p class="text-white-50">{{ country }}, {{ city }}</p>
-              </div>
-            <div class="col-lg-8">
-              <h3 class="text-white mb-4">What does the company do?</h3>
-              <p class="text-white-50">{{ business }}</p>
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+          <div class="col-lg-8">
+            <h3 class="text-white mb-4">Location</h3>
+            <p class="text-white-50">{{ country }}, {{ city }}</p>
+          </div>
+          <div class="col-lg-8">
+            <h3 class="text-white mb-4">What does the company do?</h3>
+            <p class="text-white-50">{{ business }}</p>
           </div>
           <div class="col-lg-8">
             <h3 class="text-white mb-4">What industry is it in?</h3>
             <p class="text-white-50">{{ industry }}</p>
-        </div>
-        <div class="col-lg-8">
-          <h3 class="text-white mb-4">How many employees do you currently have?</h3>
-          <p class="text-white-50">{{ employees }}</p>
-      </div>
           </div>
+          <div class="col-lg-8">
+            <h3 class="text-white mb-4">How many employees do you currently have?</h3>
+            <p class="text-white-50">{{ employees }}</p>
+          </div>
+          <div class="col-lg-8">
+            <h3 class="text-white mb-4">Historical Price</h3>
+            <p class="text-white-50">Max: ${{ max_historical_price }}</p>
+            <p class="text-white-50">Min: ${{ min_historical_price }}</p>
+          </div>
+          <div class="col-lg-8">
+            <h3 class="text-white mb-4">Year Price</h3>
+            <p class="text-white-50">Max: ${{ max_year_price }}</p>
+            <p class="text-white-50">Min: ${{ min_year_price }}</p>
+          </div>
+
+        </div>
       </div>
     </section>
 
